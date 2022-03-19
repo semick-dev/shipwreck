@@ -1,2 +1,24 @@
 # shipwreck
 An experiment with azure-storage-blob and using blob storage as an asset repository.
+
+## Usage
+
+`pip install shipwreck`
+
+Two commands.
+
+`ship grab`
+
+Updates your local directory with the files from the recordings.json.
+
+`ship pack`
+
+Pushes the contents of the local service directory to blob storage, updates the recordings.json with a new GUID.
+
+Links:
+
+- https://docs.python.org/3/library/zlib.html
+- https://docs.python.org/3/library/archiving.html
+- https://pypi.org/project/azure-storage-blob/
+- https://docs.python.org/3/library/typing.html
+- https://docs.python.org/3/library/argparse.html
