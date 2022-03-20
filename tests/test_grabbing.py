@@ -1,9 +1,20 @@
-# "grabbing" is the action of pulling a blob from a storage location decompressing it into temporary folder structure, and then populating in the target directories
+# "pulling" is the action of pulling a blob from a storage location decompressing it into temporary folder structure, and then populating in the target directories
 from context_creator import initialize_test_context
 from utils import pushd
-from ship import grab
+from ship import pull
+import pytest
 
-def test_grab_entirely_empty_directory_structure():
+# example expected pytest exception
+# with pytest.raises(RuntimeError) as excinfo:
+
+#     def f():
+#         f()
+
+#     f()
+# assert "maximum recursion" in str(excinfo.value)
+
+
+def test_pull_entirely_empty_directory_structure():
     recording_json = """
 
     """
@@ -14,7 +25,7 @@ def test_grab_entirely_empty_directory_structure():
     pass
 
 
-def test_grab_partially_present_directory_structure():
+def test_pull_partially_present_directory_structure():
     recording_json = """
 
     """
@@ -25,11 +36,11 @@ def test_grab_partially_present_directory_structure():
         "directory2/",
         "directory3/directory4/"
     ], recording_json)
-     # fmt: on
+    # fmt: on
     pass
 
 
-def test_grab_partially_filled_directory_structure():
+def test_pull_partially_filled_directory_structure():
     recording_json = """
 
     """
@@ -42,11 +53,11 @@ def test_grab_partially_filled_directory_structure():
         "directory3/directory4/test1.json"
     ], recording_json)
     # fmt: on
-    
+
     pass
 
 
-def test_grab_entirely_filled_directory_structure():
+def test_pull_entirely_filled_directory_structure():
     recording_json = """
 
     """
@@ -60,5 +71,5 @@ def test_grab_entirely_filled_directory_structure():
         "directory3/directory4/test45.json"
         "directory3/directory4/test47.json"
     ], recording_json)
-     # fmt: on
+    # fmt: on
     pass

@@ -3,10 +3,9 @@ from typing import List, Tuple
 import pdb
 import os
 
+
 def parse_init_tuple(json_content: str) -> Tuple[str, List[str], str, str, str]:
     content = json_content.replace("\n", "")
-
-    pdb.set_trace()
     json_config = json.loads(content)
 
     prefix = json_config["configuration"]["blob_prefix"]
@@ -15,7 +14,8 @@ def parse_init_tuple(json_content: str) -> Tuple[str, List[str], str, str, str]:
     container = json_config["configuration"]["storage_account_container"]
     guid = json_config["targeting"]["guid"]
 
-    return Tuple[prefix, patterns, account, container, guid]
+    return (prefix, patterns, account, container, guid)
+
 
 class RecordingConfig:
     def __init__(
@@ -32,10 +32,9 @@ class RecordingConfig:
         with open(json_path, "r") as f:
             json_content = f.read()
 
-        return cls(*parse_init_tuple(json_content))
+        arg = parse_init_tuple(json_content)
+        return cls(*arg)
 
     @classmethod
     def load_from_json_string(cls, json_content: str):
-        pdb.set_trace()
-        tuple = parse_init_tuple(json_content)
-        return cls(*tuple)
+        return cls(*parse_init_tuple(json_content))

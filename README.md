@@ -7,11 +7,11 @@ An experiment with azure-storage-blob and using blob storage as an asset reposit
 
 Two commands.
 
-`ship grab`
+`ship pull`
 
 Updates your local directory with the files from the recording.json.
 
-`ship pack`
+`ship push`
 
 Pushes the contents of the local service directory to blob storage, updates the recording.json with a new GUID.
 

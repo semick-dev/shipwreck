@@ -1,5 +1,5 @@
 from .main import main
-from .interact import grab, pack
+from .interact import pull, pull
 from .config import RecordingConfig
 
-__all__ = ["main", "grab", "pack", "RecordingConfig"]
+__all__ = ["main", "pull", "pull", "RecordingConfig"]

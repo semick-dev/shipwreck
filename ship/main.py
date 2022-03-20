@@ -1,4 +1,5 @@
 import argparse
+from decimal import InvalidOperation
 
 
 def main():
@@ -6,4 +7,16 @@ def main():
         description="This CLI app is used to push and pull service directory recordings back and forth to blob storage."
     )
 
-    print("main!")
+    parser.add_argument(
+        "command",
+        metavar="cmd",
+        type=str,
+        nargs="+",
+        choices=["push", "pull"],
+        help="Uploading or downloading, which do you need?",
+    )
+
+    parser.parse_args()
+
+    if not parser.command:
+        raise InvalidOperation("That is not a valid command. ")

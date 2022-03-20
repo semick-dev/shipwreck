@@ -1,1 +1,1 @@
-# "packing" is the action of zipping up a service directory along with all the discovered recordings directories
+# "pushing" is the action of zipping up a service directory along with all the discovered recordings directories

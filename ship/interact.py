@@ -1,16 +1,17 @@
 from .config import RecordingConfig
 
-def grab(recordings_directory: str, config: RecordingConfig) -> None:
-    print("grab")
+
+def pull(recordings_directory: str, config: RecordingConfig) -> None:
+    print("pull")
 
 
-def pack() -> None:
+def push() -> None:
     # find
-    print("pack")
+    print("push")
 
 
 def get_recordings_configuration(argument_directory: str = None) -> None:
-    
+
     pass
 
 
