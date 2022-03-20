@@ -22,3 +22,19 @@ Links:
 - https://pypi.org/project/azure-storage-blob/
 - https://docs.python.org/3/library/typing.html
 - https://docs.python.org/3/library/argparse.html
+
+## Configuration
+
+```json
+{
+    "configuration": { 
+        "blob_prefix": "<prefix before the targeting guid>",
+        "recordings_directory_patterns": [ "<glob pattern array>" ],
+        "storage_account": "<blob storage>",
+        "storage_account_container": "<blob storage container>"
+    },
+    "targeting": {
+        "guid": "<identifier of a blob uploaded to storage>"
+    }
+}
+```

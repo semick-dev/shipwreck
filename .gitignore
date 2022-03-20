@@ -128,8 +128,13 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# ignore  virtual environments
 .venv*
 venv*
 
+# environment files
 .env
 .env.ps1
+
+# test folders that will be expanded into real directories during testing
+tests/.run/
