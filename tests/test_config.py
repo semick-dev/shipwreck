@@ -16,7 +16,6 @@ def validate_recording_config(
 
 
 def test_file_parse():
-    # fmt: off
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/", 
@@ -29,7 +28,6 @@ def test_file_parse():
             "guid": "abc321"
         }
     }"""
-    # fmt: on
 
     test_context = initialize_test_context([], None)
     temporary_file = os.path.join(test_context, "recording.json")
@@ -42,7 +40,6 @@ def test_file_parse():
 
 
 def test_json_content_parse():
-    # fmt: off
     recording_json = (
         "{"
         '"configuration": {'
@@ -57,7 +54,6 @@ def test_json_content_parse():
         "}"
         "}"
     )
-    # fmt: on
 
     recording_config = RecordingConfig.load_from_json_string(recording_json)
 
