@@ -9,11 +9,11 @@ Two commands.
 
 `ship grab`
 
-Updates your local directory with the files from the recordings.json.
+Updates your local directory with the files from the recording.json.
 
 `ship pack`
 
-Pushes the contents of the local service directory to blob storage, updates the recordings.json with a new GUID.
+Pushes the contents of the local service directory to blob storage, updates the recording.json with a new GUID.
 
 Links:
 

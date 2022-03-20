@@ -22,8 +22,14 @@ def create_target_directory() -> str:
 
     return target_directory
 
-def initialize_test_context(folder_structure_list: List[str]) -> str:
+def initialize_test_context(folder_structure_list: List[str], recording_json_content: str = None) -> str:
     target_directory = create_target_directory()
+
+    target_recording_json = os.path.join(target_directory, "recording.json")
+
+    if recording_json_content:
+        with open(target_recording_json, "w") as f:
+            f.write(recording_json_content)
 
     for path in folder_structure_list:
         ext = os.path.splitext(os.path.normpath(path))[1]
