@@ -1,5 +1,5 @@
 # "pulling" is the action of pulling a blob from a storage location decompressing it into temporary folder structure, and then populating in the target directories
-from context_creator import initialize_test_context
+from test_context_creator import initialize_test_context
 from utils import pushd
 from ship import pull
 import pytest

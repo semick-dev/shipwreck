@@ -1,32 +1,37 @@
 import argparse
 import pdb
 import os
-from .config import RecordingConfig
+import sys
+import tempfile
+import shutil
+
 from typing import Tuple, List
 
-
-def resolve_target_directory(dir_from_cmd: str = None) -> Tuple[str, RecordingConfig]:
-    cwd = os.getcwd()
-
-    pass
+from .context import ShipContext
+from .config import RecordingConfig
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="This CLI app is used to push and pull service directory recordings back and forth to blob storage."
+        description=(
+            "This CLI app is used to push and pull service directory recordings back and forth to ",
+            'blob storage. A "reset" operation is merely clearing all discovered recordings directories. ',
+            'Same as before a "pull" operation.',
+        )
     )
 
     parser.add_argument(
         "command",
         type=str,
         nargs="?",
-        choices=["push", "pull"],
-        help="Uploading or downloading, which do you need?",
+        choices=["push", "pull", "clear"],
+        help="Uploading, downloading, or resetting, which do you need?",
     )
 
     parser.add_argument(
         "-d",
         "--directory",
+        dest="directory",
         help=(
             "The directory context in which to begin the search for a recording.json. "
             "Crawls upwards until it finds either a .git folder or recording.json. "
@@ -35,7 +40,17 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.command[0] == "push":
-        print("push")
-    elif args.command[0] == "pull":
-        print("pull")
+    try:
+        # find recording file, resolve target directory
+        # get a recording context from resolved directory
+        context = ShipContext.load_from_directory(args.directory)
+
+        if args.command[0] == "push":
+            print("push")
+        elif args.command[0] == "pull":
+            print("pull")
+        elif args.command[0] == "clear":
+            print("clear")
+
+    finally:
+        pass

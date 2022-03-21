@@ -1,19 +1,11 @@
+from ship.context import ShipContext
 from .config import RecordingConfig
 
 
-def pull(recordings_directory: str, config: RecordingConfig) -> None:
+def pull(context: ShipContext) -> None:
     print("pull")
 
 
-def push() -> None:
+def push(context: ShipContext) -> None:
     # find
     print("push")
-
-
-def get_recordings_configuration(argument_directory: str = None) -> None:
-
-    pass
-
-
-def store_service_directory() -> None:
-    pass

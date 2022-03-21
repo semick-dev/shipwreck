@@ -12,8 +12,8 @@ def get_test_name() -> str:
     return test_name.split(" ")[0]
 
 
-def create_target_directory() -> str:
-    test_name = get_test_name()
+def create_target_directory(optional_test_name: str = None) -> str:
+    test_name = optional_test_name or get_test_name()
     target_directory = os.path.abspath(os.path.join(root_dir, "tests", ".run", test_name))
 
     if os.path.exists(target_directory):
@@ -24,10 +24,17 @@ def create_target_directory() -> str:
     return target_directory
 
 
-def initialize_test_context(folder_structure_list: List[str], recording_json_content: str = None) -> str:
-    target_directory = create_target_directory()
-
-    target_recording_json = os.path.join(target_directory, "recording.json")
+def initialize_test_context(
+    folder_structure_list: List[str], recording_json_content: str = None, test_name: str = None
+) -> str:
+    target_directory = create_target_directory(test_name)
+    possible_recording_json_location = [path for path in folder_structure_list if path.endswith("recording.json")]
+    if any(possible_recording_json_location):
+        if len(possible_recording_json_location) > 1:
+            raise Exception("Misconfigured test, you cannot place multiple custom recording.json locations.")
+        target_recording_json = possible_recording_json_location[0]
+    else:
+        target_recording_json = os.path.join(target_directory, "recording.json")
 
     if recording_json_content:
         with open(target_recording_json, "w") as f:

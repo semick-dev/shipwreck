@@ -1,6 +1,6 @@
 # "pushing" is the action of zipping up a service directory along with all the discovered recordings directories
-from context_creator import initialize_test_context
-from ship.config import RecordingConfig
+from test_context_creator import initialize_test_context
+from ship import RecordingConfig
 from utils import pushd
 import os
 import pdb
