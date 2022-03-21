@@ -20,12 +20,15 @@ def pytest_sessionstart(session):
     if os.path.exists(run_dir):
         shutil.rmtree(run_dir)
 
-    if not get_storage_key():
-        collect_ignore.append("test_pushing.py")
-        collect_ignore.append("test_pulling.py")
 
 def get_storage_key():
     return os.getenv("STORAGE_KEY")
+
+
+def pytest_runtest_setup(item):
+    if "live_only" in item.keywords and not get_storage_key():
+        pytest.skip("LiveTest Only")
+
 
 # used to determine if a test is live
 @pytest.fixture(scope="session")
@@ -35,5 +38,5 @@ def is_live() -> Tuple[bool, str, str]:
 
     if storage_key:
         return (True, storage_key, storage_uri)
-    
-    return (False, None, None)
+
+    return (False, None, storage_uri)

@@ -39,8 +39,7 @@ class ShipContext:
         self.config = recording_config
         self.work_directory = temp_context_directory
         self.target_directory = target_directory
-        self.recording_json = os.path.join(target_directory, 'recording.json')
-
+        self.recording_json = os.path.join(target_directory, "recording.json")
 
     def clear(self):
         files = self.get_recordings_files()
@@ -55,10 +54,8 @@ class ShipContext:
 
         return results
 
-
     def update_guid(self, new_guid: str):
         self.config.update_recording_json_guid(self.recording_json, new_guid)
-
 
     @classmethod
     def load_from_directory(cls, start_directory: str = None, optional_work_directory: str = None):

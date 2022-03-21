@@ -15,7 +15,7 @@ RECORDING_JSON: str = """{
         "assets-prefix-path": "recordings/", 
         "blob_prefix": "sdk/tables/",
         "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
-        "storage_account": "https://testaccount.blob.core.windows.net/",
+        "storage_account": "{}",
         "storage_account_container": "test0"
     },
     "targeting": {
@@ -36,13 +36,13 @@ def validate_context(
     assert context.target_directory == expected_target_dir
 
 
-def test_load_from_directory_cwd():
+def test_load_from_directory_cwd(is_live):
     start_directory_name = "directory1/"
 
     # fmt: off
     target_directory = initialize_test_context([
         start_directory_name,
-    ], RECORDING_JSON)
+    ], RECORDING_JSON.replace("{}", (is_live[2])))
     ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
     # fmt: on
 
@@ -53,13 +53,13 @@ def test_load_from_directory_cwd():
         validate_context(context, target_directory, ship_working_directory)
 
 
-def test_load_from_directory_passed():
+def test_load_from_directory_passed(is_live):
     start_directory_name = "directory1/"
 
     # fmt: off
     target_directory = initialize_test_context([
         start_directory_name,
-    ], RECORDING_JSON)
+    ], RECORDING_JSON.replace("{}", (is_live[2])))
     ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
     # fmt: on
 
@@ -70,13 +70,13 @@ def test_load_from_directory_passed():
     validate_context(context, target_directory, ship_working_directory)
 
 
-def test_load_internal_temp_dir():
+def test_load_internal_temp_dir(is_live):
     start_directory_name = "directory1/"
 
     # fmt: off
     target_directory = initialize_test_context([
         start_directory_name,
-    ], RECORDING_JSON)
+    ], RECORDING_JSON.replace("{}", (is_live[2])))
     ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
     # fmt: on
 
@@ -84,14 +84,14 @@ def test_load_internal_temp_dir():
     validate_context(context, target_directory, get_shipwreck_dir())
 
 
-def test_context_creation_filled_work_directory():
+def test_context_creation_filled_work_directory(is_live):
     # fmt: off
     target_directory = initialize_test_context([
         "directory1/",
         "directory1/test1.json",
         "directory2/",
         "directory3/directory4/test1.json"
-    ], RECORDING_JSON)
+    ], RECORDING_JSON.replace("{}", (is_live[2])))
     ship_working_directory = initialize_test_context([
         "test1.json"
         "directory1/test30.json",
@@ -110,9 +110,9 @@ def test_context_creation_filled_work_directory():
     assert len(os.listdir(ship_working_directory)) == 0
 
 
-def test_context_create_finds_recording_json_at_root():
+def test_context_create_finds_recording_json_at_root(is_live):
     # fmt: off
-    target_directory = initialize_test_context([], RECORDING_JSON)
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
     ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
     # fmt: on
 
@@ -122,7 +122,7 @@ def test_context_create_finds_recording_json_at_root():
     validate_context(context, target_directory, ship_working_directory)
 
 
-def test_context_create_fails_without_recording_json_present():
+def test_context_create_fails_without_recording_json_present(is_live):
     # fmt: off
     target_directory = initialize_test_context([
         "directory1/",

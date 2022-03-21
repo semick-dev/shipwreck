@@ -15,19 +15,21 @@ def validate_recording_config(
     assert recording_config.guid == expected_targeting_guid
 
 
-def test_file_parse():
+def test_file_parse(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/", 
             "blob_prefix": "sdk/tables/",
             "recordings_directory_patterns": [],
-            "storage_account": "https://testaccount.blob.core.windows.net/",
+            "storage_account": "{}",
             "storage_account_container": "test0"
         },
         "targeting": {
             "guid": "abc321"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
 
     test_context = initialize_test_context([], None)
     temporary_file = os.path.join(test_context, "recording.json")
@@ -39,7 +41,7 @@ def test_file_parse():
     validate_recording_config(recording_config, "abc321", 0)
 
 
-def test_json_content_parse():
+def test_json_content_parse(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/", 
@@ -51,7 +53,9 @@ def test_json_content_parse():
         "targeting": {
             "guid": "abc123"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
 
     recording_config = RecordingConfig.load_from_json_string(recording_json)
 

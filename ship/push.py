@@ -11,9 +11,9 @@ def stage_files(context: ShipContext, file_list: List[str]) -> str:
     # copy files in list to new context
     staging_directory = os.path.join(context.work_directory, ".staging")
 
-
     # todo: something with symlinks here
     return staging_directory
+
 
 def create_context_file(context: ShipContext, file_list: List[str]) -> None:
     # copy files in list to new context
@@ -29,6 +29,7 @@ def write_to_storage(context: ShipContext, root_dir: str) -> str:
 
     # return new guid
     return new_guid
+
 
 def push(context: ShipContext) -> None:
     all_files = context.get_recordings_files()
