@@ -51,11 +51,9 @@ def write_to_storage(context: ShipContext, staged_path: str) -> str:
 
 def push(context: ShipContext) -> None:
     all_files = context.get_recordings_files()
-
-    # write them to the work directory
+   
     staged_files = stage_files(context, all_files)
 
-    # zip em and write to storage
     new_guid = write_to_storage(context, staged_files)
 
     # update the local reference

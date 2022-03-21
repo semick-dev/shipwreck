@@ -44,11 +44,11 @@ def main():
         # get a recording context from resolved directory
         context = ShipContext.load_from_directory(args.directory)
 
-        if args.command[0] == "push":
+        if args.command == "push":
             push(context)
-        elif args.command[0] == "pull":
+        elif args.command == "pull":
             pull(context)
-        elif args.command[0] == "clear":
+        elif args.command == "clear":
             clear(context)
     finally:
         pass

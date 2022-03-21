@@ -1,44 +1,15 @@
 # shipwreck
 An experiment with azure-storage-blob and using blob storage as an asset repository.
 
+## In Practice
+
+<example image here>
+
+## Installation
+
+`pip install git+https://github.com/semick-dev/shipwreck.git`
+
 ## Usage
-
-`pip install shipwreck`
-
-Two commands.
-
-`ship pull`
-
-Updates your local directory with the files from the recording.json.
-
-`ship push`
-
-Pushes the contents of the local service directory to blob storage, updates the recording.json with a new GUID.
-
-Links:
-
-- https://docs.python.org/3/library/zlib.html
-- https://docs.python.org/3/library/archiving.html
-- https://pypi.org/project/azure-storage-blob/
-- https://docs.python.org/3/library/typing.html
-- https://docs.python.org/3/library/argparse.html
-
-## Remaining Todo
-
-- push
-    - [x] Move files into staging
-    - [ ] Zip file into single directory
-    - [ ] upload zip file to blob storage, get the URI, return the guid
-    - [x] update the settings json with the guid
-
-- pull
-    - [ ] download zip from guid named in settings json
-    - [ ] place into working directory
-    - [ ] unzip into staging
-    - [ ] apply onto existing directory structure
-
-
-## Invoking
 
 To access blob storage, you _must_ set environment variable `STORAGE_KEY`, which should be a key that is compatible with your targeted `recording.json`.
 
@@ -79,8 +50,8 @@ optional arguments:
 
 ```
 <use python39 venv>
-semick-dev/azure-sdk-for-python@experiment/test-blob-recording-storage
-cd sdk/tables/azure-data-tables
+git clone semick-dev/azure-sdk-for-python@experiment/test-blob-recording-storage
+cd <cloned>/sdk/tables/azure-data-tables
 pip install tox tox-monorepo git+https://github.com/semick-dev/shipwreck.git
 pip install -r dev-requirements
 ship pull
