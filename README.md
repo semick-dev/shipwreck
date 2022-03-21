@@ -3,7 +3,9 @@ An experiment with azure-storage-blob and using blob storage as an asset reposit
 
 ## In Practice
 
-<example image here>
+! [](example_of_ship.gif)
+
+`ship push` just picks up all the recordings in your directory and pushes them up to the blob storage. Simple.
 
 ## Installation
 
@@ -48,13 +50,21 @@ optional arguments:
 
 ## Demo
 
+### Environment Setup
 ```
 <use python39 venv>
 git clone semick-dev/azure-sdk-for-python@experiment/test-blob-recording-storage
 cd <cloned>/sdk/tables/azure-data-tables
-pip install tox tox-monorepo git+https://github.com/semick-dev/shipwreck.git
+SET STORAGE_KEY=<storage_key>
+SET PROXY_URL="http://localhost:5000"
+pip install . git+https://github.com/semick-dev/shipwreck.git
 pip install -r dev-requirements
+```
+
+### Action
+
+```
 ship pull
-git status
-tox -e whl -c ../../../eng/tox/tox.ini
+git status <to see new populated files>
+pytest
 ```
