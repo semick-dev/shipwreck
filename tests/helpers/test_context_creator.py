@@ -3,6 +3,7 @@ from typing import List
 import shutil
 import os
 import pdb
+import uuid
 
 root_dir = os.path.abspath(os.path.join(os.path.abspath(__file__), "..", "..", ".."))
 
@@ -52,10 +53,10 @@ def initialize_test_context(
 
             if ext == ".json" and not path.endswith("recording.json"):
                 with open(resolved_path, "w") as f:
-                    f.write('{ "a": "b" }')
+                    f.write('{ "a": "' + str(uuid.uuid4()) + '" }')
             elif ext == ".yml":
                 with open(resolved_path, "w") as f:
-                    f.write('- list item!')
+                    f.write("- list item!")
         else:
             resolved_path = os.path.join(target_directory, path)
             Path(resolved_path).mkdir(parents=True, exist_ok=True)

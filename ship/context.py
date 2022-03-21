@@ -55,10 +55,10 @@ class ShipContext:
         for file in files:
             os.remove(file)
 
-    def get_recordings_files(self):
+    def get_recordings_files(self, target_directory: str = None):
         results = []
         for pattern in self.config.recordings_patterns:
-            target_glob = os.path.join(self.target_directory, pattern)
+            target_glob = os.path.join(target_directory or self.target_directory, pattern)
             results.extend(glob.glob(target_glob, recursive=True))
 
         return results

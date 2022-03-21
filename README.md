@@ -26,10 +26,10 @@ Links:
 ## Remaining Todo
 
 - push
-    - [ ] Move files into staging
+    - [x] Move files into staging
     - [ ] Zip file into single directory
     - [ ] upload zip file to blob storage, get the URI, return the guid
-    - [ ] update the settings json with the guid
+    - [x] update the settings json with the guid
 
 - pull
     - [ ] download zip from guid named in settings json
@@ -73,4 +73,17 @@ optional arguments:
         "guid": "<identifier of a blob uploaded to storage>"
     }
 }
+```
+
+## Demo
+
+```
+<use python39 venv>
+semick-dev/azure-sdk-for-python@experiment/test-blob-recording-storage
+cd sdk/tables/azure-data-tables
+pip install tox tox-monorepo git+https://github.com/semick-dev/shipwreck.git
+pip install -r dev-requirements
+ship pull
+git status
+tox -e whl -c ../../../eng/tox/tox.ini
 ```

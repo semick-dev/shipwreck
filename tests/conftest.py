@@ -6,12 +6,11 @@ import shutil
 from typing import Tuple
 from dotenv import load_dotenv
 
+# load up all the environment variables from .env files in the test directory
 load_dotenv()
 
 # this import makes each file directly under `helpers` available as a namespace in a test file. EG: "import context_creator.<function>"
 sys.path.append(os.path.join(os.path.dirname(__file__), "helpers"))
-
-collect_ignore = []
 
 # clean up before every session starts
 def pytest_sessionstart(session):
