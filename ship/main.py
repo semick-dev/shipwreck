@@ -16,11 +16,9 @@ from .clear import clear
 
 def main():
     parser = argparse.ArgumentParser(
-        description=(
-            "This CLI app is used to push and pull service directory recordings back and forth to ",
-            'blob storage. A "reset" operation is merely clearing all discovered recordings directories. ',
-            'Same as before a "pull" operation.',
-        )
+        description="This CLI app is used to push and pull service directory recordings back and forth to "
+        + 'blob storage. A "reset" operation is merely clearing all discovered recordings directories. '
+        + 'Same as before a "pull" operation.'
     )
 
     parser.add_argument(
@@ -35,11 +33,9 @@ def main():
         "-d",
         "--directory",
         dest="directory",
-        help=(
-            "The directory context in which to begin the search for a recording.json. "
-            "Crawls upwards until it finds either a .git folder or recording.json. "
-            "Not providing this argument will start the search from os.getcwd()."
-        ),
+        help="The directory context in which to begin the search for a recording.json. "
+        + "Crawls upwards until it finds either a .git folder or recording.json. "
+        + "Not providing this argument will start the search from os.getcwd().",
     )
     args = parser.parse_args()
 

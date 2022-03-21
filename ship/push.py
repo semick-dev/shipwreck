@@ -37,6 +37,8 @@ def push(context: ShipContext) -> None:
     # write them to the work directory
     staged_files = stage_files(context, all_files)
 
-    new_guid = write_to_storage(staged_files)
+    # zip em and write to storage
+    new_guid = write_to_storage(context, staged_files)
 
+    # update the local reference
     context.update_guid(new_guid)

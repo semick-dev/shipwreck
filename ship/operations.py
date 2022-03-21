@@ -1,11 +1,19 @@
 from azure.storage.blob import BlobServiceClient
-from ship.context import ShipContext
+from .context import ShipContext
+from azure.storage.blob import BlobClient
 
-CONNECTION_STRING = (
-    "DefaultEndpointsProtocol=https;AccountName=",
-    "{hostname};AccountKey={key};EndpointSuffix=core.windows.net",
-)
+import pdb
 
 
-def get_service_content(context: ShipContext) -> BlobServiceClient:
-    pass
+def upload_blob_from_client(context: ShipContext, client: BlobClient, file_location: str):
+    with open(file_location, "rb") as data:
+        result = client.upload_blob(data)
+        pdb.set_trace()
+
+
+def upload_blob(context: ShipContext, blob_name: str, file_location: str):
+    bc = context.get_blob_client(blob_name)
+
+    with open(file_location, "rb") as data:
+        result = bc.upload_blob(data)
+        pdb.set_trace()

@@ -7,6 +7,7 @@ from test_config import validate_recording_config
 import os
 import pdb
 import pytest
+import json
 
 RECORDING_JSON_GUID: str = "abc321"
 RECORDING_JSON_PATTERNS_LENGTH: int = 2
@@ -138,3 +139,71 @@ def test_context_create_fails_without_recording_json_present(is_live):
             start_directory=start_directory, optional_work_directory=ship_working_directory
         )
     assert "Unable to locate a recording json." in str(exception)
+
+
+def test_context_gets_connection_string(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+
+    cs = context.get_connection_string()
+
+    assert cs is not None
+
+
+def test_context_gets_blob_url(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+    blobname = "blob1"
+    cs = context.get_blob_url(blobname)
+
+    assert cs is not None
+    assert blobname in cs
+
+
+def test_context_updates_target_guid(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+
+    new_guid = "new_guid"
+    context.update_guid(new_guid)
+
+    with open(context.recording_json, "r") as f:
+        json_contents = json.loads(f.read())
+
+    result = json_contents["targeting"]["guid"]
+
+    assert result == new_guid
+
+
+@pytest.mark.live_only
+def test_context_gets_container_client(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+
+    container_client = context.get_container_client()
+    results = container_client.list_blobs()
+    assert results is not None

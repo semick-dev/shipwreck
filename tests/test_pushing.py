@@ -13,16 +13,19 @@ import pytest
 def test_push_entirely_empty_directory(is_live):
     recording_json = """{
         "configuration": {
-            "assets-prefix-path": "recordings/",
+            "assets-prefix-path": "recordings/", 
             "blob_prefix": "sdk/tables/",
-            "recordings_directory_patterns": [],
+            "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
             "storage_account": "https://testaccount.blob.core.windows.net/",
             "storage_account_container": "test0"
         },
         "targeting": {
-            "guid": "abc321"
+            "guid": "abc123"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
+
     # fmt: off
     test_context = initialize_test_context([], recording_json)
     # fmt: on
@@ -34,16 +37,19 @@ def test_push_entirely_empty_directory(is_live):
 def test_push_files_in_single_directory(is_live):
     recording_json = """{
         "configuration": {
-            "assets-prefix-path": "recordings/",
+            "assets-prefix-path": "recordings/", 
             "blob_prefix": "sdk/tables/",
-            "recordings_directory_patterns": [],
+            "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
             "storage_account": "https://testaccount.blob.core.windows.net/",
             "storage_account_container": "test0"
         },
         "targeting": {
-            "guid": "abc321"
+            "guid": "abc123"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
+
     # fmt: off
     test_context = initialize_test_context([], recording_json)
     # fmt: on
@@ -57,14 +63,17 @@ def test_push_files_in_multiple_directories(is_live):
         "configuration": {
             "assets-prefix-path": "recordings/", 
             "blob_prefix": "sdk/tables/",
-            "recordings_directory_patterns": [],
+            "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
             "storage_account": "https://testaccount.blob.core.windows.net/",
             "storage_account_container": "test0"
         },
         "targeting": {
-            "guid": "abc321"
+            "guid": "abc123"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
+
     # fmt: off
     test_context = initialize_test_context([], recording_json)
     # fmt: on
@@ -78,14 +87,17 @@ def test_push_files_in_multiple_directories_with_non_json_present(is_live):
         "configuration": {
             "assets-prefix-path": "recordings/", 
             "blob_prefix": "sdk/tables/",
-            "recordings_directory_patterns": [],
+            "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
             "storage_account": "https://testaccount.blob.core.windows.net/",
             "storage_account_container": "test0"
         },
         "targeting": {
-            "guid": "abc321"
+            "guid": "abc123"
         }
-    }"""
+    }""".replace(
+        "{}", (is_live[2])
+    )
+
     # fmt: off
     test_context = initialize_test_context([], recording_json)
     # fmt: on

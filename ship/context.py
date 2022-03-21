@@ -5,7 +5,16 @@ import shutil
 import glob
 import pdb
 
+from azure.storage.blob import ContainerClient, BlobClient, BlobServiceClient
+
 from .config import RecordingConfig
+
+CONNECTION_STRING = (
+    "DefaultEndpointsProtocol=https;AccountName={only_hostname};AccountKey={key};EndpointSuffix=core.windows.net"
+)
+
+# https://scottydoes.dfs.core.windows.net/test0/.docsettings.yml.7z
+UPLOAD_PATTERN = "{full_hostname}/{container}/{blob_prefix}/{guid}"
 
 
 def evaluate_target_dir(target_dir: str) -> Tuple[bool, bool]:
@@ -56,6 +65,34 @@ class ShipContext:
 
     def update_guid(self, new_guid: str):
         self.config.update_recording_json_guid(self.recording_json, new_guid)
+
+    def get_connection_string(self) -> str:
+        host_name = self.config.account.replace("https://", "")
+        host_name = host_name[0 : host_name.index(".")]
+
+        key = os.getenv("STORAGE_KEY")
+
+        return CONNECTION_STRING.format(only_hostname=host_name, key=key)
+
+    def get_container_client(self) -> ContainerClient:
+        # Instantiate a BlobServiceClient using a connection string
+        blob_service_client = BlobServiceClient.from_connection_string(self.get_connection_string())
+
+        # Instantiate a ContainerClient
+        container_client = blob_service_client.get_container_client(self.config.container)
+        return container_client
+
+    def get_blob_url(self, name: str) -> str:
+        return os.path.normpath(os.path.join(self.config.blob_prefix, name)).replace(os.sep, "/")
+
+    def get_blob_client(self, name: str) -> BlobClient:
+        container_client = self.get_container_client()
+
+        blob_path = self.get_blob_url(name)
+
+        blob_client = container_client.get_blob_client(blob_path)
+
+        return blob_client
 
     @classmethod
     def load_from_directory(cls, start_directory: str = None, optional_work_directory: str = None):

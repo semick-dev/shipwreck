@@ -33,6 +33,8 @@ class RecordingConfig:
         with open(recording_json_path, "r") as f:
             json_content = json.loads(f.read())
 
+        json_content["targeting"]["guid"] = new_guid
+
         new_content = json.dumps(json_content, indent=4)
 
         with open(recording_json_path, "w") as f:
