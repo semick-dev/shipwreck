@@ -14,7 +14,7 @@ import pytest
 # assert "maximum recursion" in str(excinfo.value)
 
 
-def test_pull_entirely_empty_directory_structure():
+def test_pull_entirely_empty_directory_structure(is_live):
     recording_json = """
 
     """
@@ -25,7 +25,7 @@ def test_pull_entirely_empty_directory_structure():
     pass
 
 
-def test_pull_partially_present_directory_structure():
+def test_pull_partially_present_directory_structure(is_live):
     recording_json = """
 
     """
@@ -40,7 +40,7 @@ def test_pull_partially_present_directory_structure():
     pass
 
 
-def test_pull_partially_filled_directory_structure():
+def test_pull_partially_filled_directory_structure(is_live):
     recording_json = """
 
     """
@@ -57,7 +57,7 @@ def test_pull_partially_filled_directory_structure():
     pass
 
 
-def test_pull_entirely_filled_directory_structure():
+def test_pull_entirely_filled_directory_structure(is_live):
     recording_json = """
 
     """

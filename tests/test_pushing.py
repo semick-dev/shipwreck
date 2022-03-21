@@ -6,7 +6,7 @@ import os
 import pdb
 
 
-def test_push_entirely_empty_directory():
+def test_push_entirely_empty_directory(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/",
@@ -20,13 +20,13 @@ def test_push_entirely_empty_directory():
         }
     }"""
     # fmt: off
-    test_context = initialize_test_context([], recording_json or None)
+    test_context = initialize_test_context([], recording_json)
     # fmt: on
 
     pass
 
 
-def test_push_files_in_single_directory():
+def test_push_files_in_single_directory(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/",
@@ -40,13 +40,13 @@ def test_push_files_in_single_directory():
         }
     }"""
     # fmt: off
-    test_context = initialize_test_context([], recording_json or None)
+    test_context = initialize_test_context([], recording_json)
     # fmt: on
 
     pass
 
 
-def test_push_files_in_multiple_directories():
+def test_push_files_in_multiple_directories(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/", 
@@ -60,13 +60,13 @@ def test_push_files_in_multiple_directories():
         }
     }"""
     # fmt: off
-    test_context = initialize_test_context([], recording_json or None)
+    test_context = initialize_test_context([], recording_json)
     # fmt: on
 
     pass
 
 
-def test_push_files_in_multiple_directories_with_non_json_present():
+def test_push_files_in_multiple_directories_with_non_json_present(is_live):
     recording_json = """{
         "configuration": {
             "assets-prefix-path": "recordings/", 
@@ -80,7 +80,7 @@ def test_push_files_in_multiple_directories_with_non_json_present():
         }
     }"""
     # fmt: off
-    test_context = initialize_test_context([], recording_json or None)
+    test_context = initialize_test_context([], recording_json)
     # fmt: on
 
     pass

@@ -23,6 +23,10 @@ Links:
 - https://docs.python.org/3/library/typing.html
 - https://docs.python.org/3/library/argparse.html
 
+## Invoking
+
+To access blob storage, you _must_ set environment variable `STORAGE_KEY`, which should be a key that is compatible with your targeted `recording.json`.
+
 ## Configuration
 
 ```json

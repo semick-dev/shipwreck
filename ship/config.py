@@ -29,6 +29,16 @@ class RecordingConfig:
         self.container = container
         self.guid = guid
 
+    def update_recording_json_guid(self, recording_json_path: str, new_guid: str):
+        with open(recording_json_path, 'r') as f:
+            json_content = json.loads(f.read())
+
+        new_content = json.dumps(json_content, indent=4)
+
+        with open(recording_json_path, 'w') as f:
+            f.write(new_content)
+
+
     @classmethod
     def load_from_file(cls, json_path: str):
         with open(json_path, "r") as f:

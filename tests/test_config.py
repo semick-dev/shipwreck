@@ -40,22 +40,19 @@ def test_file_parse():
 
 
 def test_json_content_parse():
-    recording_json = (
-        "{"
-        '"configuration": {'
-        '"assets-prefix-path": "recordings/",'
-        '"blob_prefix": "sdk/tables/",'
-        '"recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],'
-        '"storage_account": "https://testaccount.blob.core.windows.net/",'
-        '"storage_account_container": "test0"'
-        "},"
-        '"targeting": {'
-        '    "guid": "abc123"'
-        "}"
-        "}"
-    )
+    recording_json = """{
+        "configuration": {
+            "assets-prefix-path": "recordings/", 
+            "blob_prefix": "sdk/tables/",
+            "recordings_directory_patterns": [ "**/tests/recordings/*.json", "**/test/recordings/*.json" ],
+            "storage_account": "https://testaccount.blob.core.windows.net/",
+            "storage_account_container": "test0"
+        },
+        "targeting": {
+            "guid": "abc123"
+        }
+    }"""
 
     recording_config = RecordingConfig.load_from_json_string(recording_json)
 
     validate_recording_config(recording_config, "abc123", 2)
-    pass
