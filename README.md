@@ -3,7 +3,7 @@ An experiment with azure-storage-blob and using blob storage as an asset reposit
 
 ## In Practice
 
-! [](example_of_ship.gif)
+! [](./example_of_ship.gif)
 
 `ship push` just picks up all the recordings in your directory and pushes them up to the blob storage. Simple.
 
