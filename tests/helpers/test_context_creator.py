@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import List
 import shutil
 import os
+import pdb
 
 root_dir = os.path.abspath(os.path.join(os.path.abspath(__file__), "..", "..", ".."))
 
@@ -42,18 +43,16 @@ def initialize_test_context(
 
     for path in folder_structure_list:
         ext = os.path.splitext(os.path.normpath(path))[1]
-
         if ext:
-            resolved_path = os.path.join(target_directory, path)
-            target_directory = os.path.dirname(resolved_path)
+            resolved_path = os.path.join(target_directory, os.path.normpath(path))
+            resolved_target_directory = os.path.dirname(resolved_path)
 
-            if not os.path.exists(target_directory):
-                Path(target_directory).mkdir(parents=True, exist_ok=True)
+            if not os.path.exists(resolved_target_directory):
+                Path(resolved_target_directory).mkdir(parents=True, exist_ok=True)
 
-            if ext == ".json":
+            if ext == ".json" and not path.endswith("recording.json"):
                 with open(resolved_path, "w") as f:
                     f.write('{ "a", "b" }')
-
         else:
             resolved_path = os.path.join(target_directory, path)
             Path(resolved_path).mkdir(parents=True, exist_ok=True)

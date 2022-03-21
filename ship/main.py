@@ -9,6 +9,9 @@ from typing import Tuple, List
 
 from .context import ShipContext
 from .config import RecordingConfig
+from .push import push
+from .pull import pull
+from .clear import clear
 
 
 def main():
@@ -46,11 +49,10 @@ def main():
         context = ShipContext.load_from_directory(args.directory)
 
         if args.command[0] == "push":
-            print("push")
+            push(context)
         elif args.command[0] == "pull":
-            print("pull")
+            pull(context)
         elif args.command[0] == "clear":
-            print("clear")
-
+            clear(context)
     finally:
         pass

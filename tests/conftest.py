@@ -10,7 +10,9 @@ from ship import RecordingConfig
 
 def pytest_sessionstart(session):
     run_dir = os.path.join(os.path.dirname(__file__), ".run")
-    shutil.rmtree(run_dir)
+
+    if os.path.exists(run_dir):
+        shutil.rmtree(run_dir)
 
 
 @pytest.fixture(scope="session")

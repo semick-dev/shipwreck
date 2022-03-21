@@ -70,10 +70,11 @@ class ShipContext:
         # clean up said work directory if necessary
         if os.path.exists(work_dir):
             for item in os.listdir(work_dir):
-                if os.path.isdir(item):
-                    shutil.rmtree(item)
+                item_path = os.path.join(work_dir, item)
+                if os.path.isdir(item_path):
+                    shutil.rmtree(item_path)
                 else:
-                    os.remove(item)
+                    os.remove(item_path)
         else:
             os.mkdir(work_dir)
 
