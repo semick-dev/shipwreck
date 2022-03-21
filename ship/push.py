@@ -2,16 +2,32 @@ import os
 import sys
 import shutil
 import uuid
+import pdb
 
 from typing import List
 from .context import ShipContext
+
+def get_staging_path(context: ShipContext, staging_directory: str, file_name: str) -> str:
+    relative_path = file_name.replace(context.target_directory, "").lstrip(os.sep)
+    new_staging_path = os.path.join(staging_directory, relative_path)
+
+    return new_staging_path
 
 
 def stage_files(context: ShipContext, file_list: List[str]) -> str:
     # copy files in list to new context
     staging_directory = os.path.join(context.work_directory, ".staging")
 
-    # todo: something with symlinks here
+    # create the directory
+    os.mkdir(staging_directory)
+
+    # todo optimize this. is is slow as hell but works for a demo
+    for file in file_list:
+        new_path = get_staging_path(context, staging_directory, file)
+        os.makedirs(os.path.dirname(new_path),exist_ok=True)
+        shutil.copyfile(file, new_path)
+    
+    # todo: something with symlinks here for optimization
     return staging_directory
 
 

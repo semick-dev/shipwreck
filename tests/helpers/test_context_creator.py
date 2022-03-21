@@ -52,7 +52,10 @@ def initialize_test_context(
 
             if ext == ".json" and not path.endswith("recording.json"):
                 with open(resolved_path, "w") as f:
-                    f.write('{ "a", "b" }')
+                    f.write('{ "a": "b" }')
+            elif ext == ".yml":
+                with open(resolved_path, "w") as f:
+                    f.write('- list item!')
         else:
             resolved_path = os.path.join(target_directory, path)
             Path(resolved_path).mkdir(parents=True, exist_ok=True)

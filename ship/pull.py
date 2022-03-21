@@ -8,7 +8,8 @@ import uuid
 def stage_files(context: ShipContext) -> str:
     staging_directory = os.path.join(context.work_directory, ".staging")
 
-    # download the targeted
+    # create the directory
+    os.mkdir(staging_directory)
 
     # todo: something with symlinks here
     return staging_directory

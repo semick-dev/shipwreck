@@ -46,9 +46,9 @@ class ShipContext:
         recording_config (RecordingConfig): The parsed recording.json.
         """
         self.config = recording_config
-        self.work_directory = temp_context_directory
-        self.target_directory = target_directory
-        self.recording_json = os.path.join(target_directory, "recording.json")
+        self.work_directory = os.path.normpath(temp_context_directory)
+        self.target_directory = os.path.normpath(target_directory)
+        self.recording_json = os.path.normpath(os.path.join(target_directory, "recording.json"))
 
     def clear(self):
         files = self.get_recordings_files()

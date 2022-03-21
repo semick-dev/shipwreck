@@ -23,3 +23,27 @@ RECORDING_JSON: str = """{
         "guid": "abc321"
     }
 }"""
+
+@pytest.mark.live_only
+def test_operations_upload_blob_from_name(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+
+@pytest.mark.live_only
+def test_operations_upload_blob_from_client(is_live):
+    # fmt: off
+    target_directory = initialize_test_context([], RECORDING_JSON.replace("{}", (is_live[2])))
+    ship_working_directory = initialize_test_context([], None, get_test_name() + "_working")
+    # fmt: on
+    
+    context = ShipContext.load_from_directory(
+        start_directory=target_directory, optional_work_directory=ship_working_directory
+    )
+
+    
